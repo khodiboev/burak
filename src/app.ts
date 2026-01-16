@@ -14,7 +14,7 @@ app.use(express.json())
 /**2-sessions**/
 
 /**3-views**/
-app.set('view', path.join(__dirname, 'views'));
+app.set('view', path.join(__dirname, 'views')); 
 app.set("view engine", "ejs");
 
 
