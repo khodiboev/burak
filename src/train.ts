@@ -1,21 +1,39 @@
-//MIT Tasks <--H--G--F--E--D--C--B--A--------------------------------------------
+//MIT Tasks <--H2--H--G--F--E--D--C--B--A--------------------------------------------
+
+// TASK H2: 
+// Shunday function tuzing, unga string argument pass bolsin. Function ushbu agrumentdagi digitlarni yangi stringda return qilsin. MASALAN: getDigits("m14i1t") return qiladi "141"
+function getDigits(str: string): string {
+  let a: string = "";
+
+  for (let i of str) {
+    if (i >= "0" && i <= "9") {
+      a += i;
+    }
+  }
+  return a;
+}
+console.log(getDigits("m14i1t"));
+console.log(getDigits("a98fbhw24gjj6bh1"));
+
+
+
 // TASK H: 
 // shunday function tuzing, u integerlardan iborat arrayni argument sifatida qabul qilib, faqat positive qiymatlarni olib string holatda return qilsin. MASALAN: getPositive([1, -4, 2]) return qiladi "12"
 
-function getPositive(arr: number[]):string {
-    let result:string = "";
+// function getPositive(arr: number[]):string {
+//     let result:string = "";
 
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] > 0) {
-            result = result + String(arr[i]);
-        }
-    }
+//     for (let i = 0; i < arr.length; i++) {
+//         if (arr[i] > 0) {
+//             result = result + String(arr[i]);
+//         }
+//     }
 
-    return result;
-}
+//     return result;
+// }
 
-console.log(getPositive([1, -4, 2]));
-console.log(getPositive([3, -4, 5, 7, -9]));
+// console.log(getPositive([1, -4, 2]));
+// console.log(getPositive([3, -4, 5, 7, -9]));
 
 
 // ========================================================
