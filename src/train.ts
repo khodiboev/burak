@@ -1,19 +1,43 @@
-//MIT Tasks <--H2--H--G--F--E--D--C--B--A--------------------------------------------
+//MIT Tasks <--I--H2--H--G--F--E--D--C--B--A--------------------------------------------
+// TASK-I:
+// Shunday function tuzing, u parametrdagi array ichida eng ko'p
+// takrorlangan raqamni topib qaytarsin. MASALAN: majorityElement([1, 2, 3, 4, 5, 4, 3, 4]); return 4. Yuqoridag misolda argument sifatida kiritilayotgan array tarkibida 4 soni ko'p takrorlanganligi uchun 4'ni return qilmoqda.
+
+function majorityElement(arr: number[]): number {
+  let maxCount = 0;
+  let result = arr[0];
+  for (let i = 0; i < arr.length; i++) {
+    let count = 0;
+    for (let j = 0; j < arr.length; j++) {
+      if (arr[i] === arr[j]) {
+        count++;
+      }
+    }
+    if (count > maxCount) {
+      maxCount = count;
+      result = arr[i];
+    }
+  }
+  return result;
+}
+console.log(majorityElement([1, 2, 3, 4, 5, 4, 3, 4]));
+console.log(majorityElement([7, 8, 7, 9, 7, 10, 8, 7]));
+
 
 // TASK H2: 
 // Shunday function tuzing, unga string argument pass bolsin. Function ushbu agrumentdagi digitlarni yangi stringda return qilsin. MASALAN: getDigits("m14i1t") return qiladi "141"
-function getDigits(str: string): string {
-  let a: string = "";
+// function getDigits(str: string): string {
+//   let a: string = "";
 
-  for (let i of str) {
-    if (i >= "0" && i <= "9") {
-      a += i;
-    }
-  }
-  return a;
-}
-console.log(getDigits("m14i1t"));
-console.log(getDigits("a98fbhw24gjj6bh1"));
+//   for (let i of str) {
+//     if (i >= "0" && i <= "9") {
+//       a += i;
+//     }
+//   }
+//   return a;
+// }
+// console.log(getDigits("m14i1t"));
+// console.log(getDigits("a98fbhw24gjj6bh1"));
 
 
 
