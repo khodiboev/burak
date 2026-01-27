@@ -1,7 +1,7 @@
 import express from 'express';
-import path, { dirname } from "path"
-import router from "./views/router";
-import routerAdmin from './views/router-admin';
+import path from "path"
+import router from "./router";
+import routerAdmin from './router-admin';
 import morgan from "morgan";
 import { MORGAN_FORMAT } from './libs/config';
 
@@ -17,7 +17,7 @@ app.use(morgan(MORGAN_FORMAT))
 /**2-sessions**/
 
 /**3-views**/
-app.set('view', path.join(__dirname, 'views')); 
+app.set('views', path.join(__dirname, 'views')); 
 app.set("view engine", "ejs");
 
 
