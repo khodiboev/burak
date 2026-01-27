@@ -1,27 +1,48 @@
-//MIT Tasks <--I--H2--H--G--F--E--D--C--B--A--------------------------------------------
+//MIT Tasks <--J--I--H2--H--G--F--E--D--C--B--A--------------------------------------------
+// TASK J:
+// Shunday function tuzing, u string qabul qilsin.
+// Va string ichidagi eng uzun so'zni qaytarsin. MASALAN: findLongestWord("I came from Uzbekistan!"); return "Uzbekistan!". Yuqoridagi text tarkibida 'Uzbekistan'
+// eng uzun so'z bo'lganligi uchun 'Uzbekistan'ni qaytarmoqda
+
+function findLongestWord(str: string): string {
+  let words = str.split(" ");
+  let longest = "";
+
+  for (let word of words) {
+    if (word.length > longest.length) {
+      longest = word;
+    }
+  }
+
+  return longest;
+}
+console.log(findLongestWord("I came from Uzbekistan!"));
+
+
+
 // TASK-I:
 // Shunday function tuzing, u parametrdagi array ichida eng ko'p
 // takrorlangan raqamni topib qaytarsin. MASALAN: majorityElement([1, 2, 3, 4, 5, 4, 3, 4]); return 4. Yuqoridag misolda argument sifatida kiritilayotgan array tarkibida 4 soni ko'p takrorlanganligi uchun 4'ni return qilmoqda.
 
-function majorityElement(arr: number[]): number {
-  let maxCount = 0;
-  let result = arr[0];
-  for (let i = 0; i < arr.length; i++) {
-    let count = 0;
-    for (let j = 0; j < arr.length; j++) {
-      if (arr[i] === arr[j]) {
-        count++;
-      }
-    }
-    if (count > maxCount) {
-      maxCount = count;
-      result = arr[i];
-    }
-  }
-  return result;
-}
-console.log(majorityElement([1, 2, 3, 4, 5, 4, 3, 4]));
-console.log(majorityElement([7, 8, 7, 9, 7, 10, 8, 7]));
+// function majorityElement(arr: number[]): number {
+//   let maxCount = 0;
+//   let result = arr[0];
+//   for (let i = 0; i < arr.length; i++) {
+//     let count = 0;
+//     for (let j = 0; j < arr.length; j++) {
+//       if (arr[i] === arr[j]) {
+//         count++;
+//       }
+//     }
+//     if (count > maxCount) {
+//       maxCount = count;
+//       result = arr[i];
+//     }
+//   }
+//   return result;
+// }
+// console.log(majorityElement([1, 2, 3, 4, 5, 4, 3, 4]));
+// console.log(majorityElement([7, 8, 7, 9, 7, 10, 8, 7]));
 
 
 // TASK H2: 
