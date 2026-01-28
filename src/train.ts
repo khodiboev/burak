@@ -1,3 +1,34 @@
+/* Project Standarts:
+- Logging standarts
+- Naming standarts:
+  - function, method, variable => camelCase
+  - class, enum => PascalCase
+  - folder, file => kebab-case
+  - css => snake_case
+- Error handling
+*/
+
+/*
+  Traditional API
+  Rest API
+  GraphQL API
+  ...
+*/
+
+/*
+  Traditional FD => SSR => EJS
+  Modern FD => SPA => REACT / VUE / ANGULAR
+*/
+
+/*
+  request join
+  self destroy
+*/
+
+
+
+
+
 //MIT Tasks <--J--I--H2--H--G--F--E--D--C--B--A--------------------------------------------
 // TASK J:
 // Shunday function tuzing, u string qabul qilsin.

@@ -15,6 +15,7 @@ restaurantController.goHome = (req: Request, res: Response) => {
         //send | json | redirect | end | render
     } catch(err) {
         console.log("Error, goHome", err)
+        res.redirect('/admin');
     } 
 };
 
@@ -24,6 +25,7 @@ restaurantController.getLogin = (req: Request, res: Response) => {
         res.render('login');
     } catch(err) {
         console.log("Error, getLogin", err)
+        res.redirect('/admin');
     } 
 };
 
@@ -33,6 +35,7 @@ restaurantController.getSignup = (req: Request, res: Response) => {
         res.render('signup');
     } catch(err) {
         console.log("Error, getSignup", err)
+        res.redirect('/admin');
     } 
 };
 
@@ -57,6 +60,8 @@ restaurantController.processSignup = async (req: AdminRequest, res: Response) =>
         res.send(result);
     } catch(err) {
         console.log("Error, processSignup", err)
+        const message = err instanceof Error ? err.message : Message.SOMETHING_WENT_WRONG;
+        res.send(`<script> alert("${message}"); window.location.replace('/admin/signup');</script>`);
         res.send(err);
     } 
 };
@@ -77,11 +82,24 @@ restaurantController.processLogin = async (req: AdminRequest, res: Response) => 
         res.send(result);
     } catch(err) {
         console.log("Error, processLogin", err)
-        res.send(err);
+        const message = err instanceof Error ? err.message : Message.SOMETHING_WENT_WRONG;
+        res.send(`<script> alert("${message}"); window.location.replace('/admin/login');</script>`);
     } 
 };
 
 
+
+restaurantController.logout = async (req: AdminRequest, res: Response) => {
+    try {
+        console.log("processLogin")
+        req.session.destroy(function(err) {
+            res.redirect('/admin');
+        });
+    } catch(err) {
+        console.log("Error, processLogin", err)
+        res.redirect('/admin');
+    } 
+};
 
 
 
