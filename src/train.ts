@@ -36,6 +36,26 @@
 
 
 //MIT Tasks <--J--I--H2--H--G--F--E--D--C--B--A--------------------------------------------
+// TASK L: 
+// Shunday function yozing, u string qabul qilsin va string ichidagi hamma sozlarni chappasiga yozib va sozlar ketma-ketligini buzmasdan stringni qaytarsin. MASALAN: reverseSentence("we like coding!") return "ew ekil gnidoc";
+
+function reverseSentence(str: string): string {
+  let words = str.split(" ");
+  let result = [];
+  for (let i = 0; i < words.length; i++) {
+    let reversedWord = "";
+    let word = words[i];
+    for (let j = word.length - 1; j >= 0; j--) {
+      reversedWord += word[j];
+    }
+    result.push(reversedWord);
+  }
+  return result.join(" ");
+}
+console.log(reverseSentence("we like coding!"));
+
+
+
 // Task K:
 // Shunday function yozing, u string qabul qilsin va string ichidagi unli harflar sonini qaytarsin.
 // MASALAN: countVowels("string") return 1;
