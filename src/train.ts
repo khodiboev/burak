@@ -8,21 +8,27 @@
 - Error handling
 */
 
-/*
+/* Request:
   Traditional API
   Rest API
   GraphQL API
   ...
 */
 
-/*
+/* Frontend Development:
   Traditional FD => SSR => EJS
   Modern FD => SPA => REACT / VUE / ANGULAR
 */
 
-/*
+/* Cookies
   request join
   self destroy
+*/
+
+/* Validation:
+  Frontend validation
+  Backend validation
+  Database validation
 */
 
 
@@ -34,18 +40,18 @@
 // Shunday function yozing, u string qabul qilsin va string ichidagi unli harflar sonini qaytarsin.
 // MASALAN: countVowels("string") return 1;
 
-function countVowels(str: string): number {
-  let count = 0;
-  const vowels = "aeiouAEIOU";
-  for (let ch of str) {
-    if (vowels.includes(ch)) {
-      count++;
-    }
-  }
-  return count;
-}
-console.log(countVowels("string"));   
-console.log(countVowels("Uzbekistan"));
+// function countVowels(str: string): number {
+//   let count = 0;
+//   const vowels = "aeiouAEIOU";
+//   for (let ch of str) {
+//     if (vowels.includes(ch)) {
+//       count++;
+//     }
+//   }
+//   return count;
+// }
+// console.log(countVowels("string"));   
+// console.log(countVowels("Uzbekistan"));
 
 
 
