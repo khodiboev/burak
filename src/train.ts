@@ -35,24 +35,48 @@
 
 
 
-//MIT Tasks <--J--I--H2--H--G--F--E--D--C--B--A--------------------------------------------
+//MIT Tasks <--M--L--K--J--I--H2--H--G--F--E--D--C--B--A--------------------------------------------
+
+// TASK M: 
+// Shunday function yozing, u raqamlardan tashkil topgan array qabul qilsin va array ichidagi har bir raqam uchun raqamni ozi va hamda osha raqamni kvadratidan tashkil topgan object hosil qilib, hosil bolgan objectlarni array ichida qaytarsin.MASALAN: getSquareNumbers([1, 2, 3]) return [{number: 1, square: 1}, {number: 2, square: 4}, {number: 3, square: 9}];
+
+function getSquareNumbers(arr: number[]): {number: number, square: number}[] {
+  // 1. Natijani saqlash uchun bo‘sh array
+  let result = [];
+  // 2. Array ichidan bitta-bitta raqam olish
+  for (let i = 0; i < arr.length; i++) {
+    // 3. Har bir raqam uchun object yaratish
+    let obj = {
+      number: arr[i],           // raqamning o‘zi
+      square: arr[i] * arr[i]   // raqamning kvadrati
+    };
+    // 4. Object’ni result arrayga qo‘shish
+    result.push(obj);
+  }
+  // 5. Hosil bo‘lgan arrayni qaytarish
+  return result;
+}
+console.log(getSquareNumbers([1, 2, 3]));
+console.log(getSquareNumbers([4, 5, 6]));
+
+
 // TASK L: 
 // Shunday function yozing, u string qabul qilsin va string ichidagi hamma sozlarni chappasiga yozib va sozlar ketma-ketligini buzmasdan stringni qaytarsin. MASALAN: reverseSentence("we like coding!") return "ew ekil gnidoc";
 
-function reverseSentence(str: string): string {
-  let words = str.split(" ");
-  let result = [];
-  for (let i = 0; i < words.length; i++) {
-    let reversedWord = "";
-    let word = words[i];
-    for (let j = word.length - 1; j >= 0; j--) {
-      reversedWord += word[j];
-    }
-    result.push(reversedWord);
-  }
-  return result.join(" ");
-}
-console.log(reverseSentence("we like coding!"));
+// function reverseSentence(str: string): string {
+//   let words = str.split(" ");
+//   let result = [];
+//   for (let i = 0; i < words.length; i++) {
+//     let reversedWord = "";
+//     let word = words[i];
+//     for (let j = word.length - 1; j >= 0; j--) {
+//       reversedWord += word[j];
+//     }
+//     result.push(reversedWord);
+//   }
+//   return result.join(" ");
+// }
+// console.log(reverseSentence("we like coding!"));
 
 
 
