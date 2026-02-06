@@ -25,13 +25,13 @@ routerAdmin.get('/check-me', restaurantController.checkAuthSession);
 
 //*Product*/
 routerAdmin.get(
-    '/product/all', 
+    '/product/all',
     restaurantController.verifyRestaurant,
     productController.getAllProducts
 );
 
 routerAdmin.post(
-    '/product/create', 
+    '/product/create',
     restaurantController.verifyRestaurant,
     makeUploader("products").array("productImages", 5),
     productController.createNewProduct
@@ -39,7 +39,7 @@ routerAdmin.post(
 
 routerAdmin.post(
     '/product/:id',
-    restaurantController.verifyRestaurant, 
+    restaurantController.verifyRestaurant,
     productController.updateChosenProduct
 );
 

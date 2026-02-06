@@ -1,5 +1,5 @@
-import {Request, Response} from "express";
-import {T} from "../libs/types/comman";
+import { Request, Response } from "express";
+import { T } from "../libs/types/comman";
 import MemberService from "../models/Member.service";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
@@ -13,30 +13,30 @@ restaurantController.goHome = (req: Request, res: Response) => {
         console.log("goHome")
         res.render("home");
         //send | json | redirect | end | render
-    } catch(err) {
+    } catch (err) {
         console.log("Error, goHome", err)
         res.redirect('/admin');
-    } 
+    }
 };
 
 restaurantController.getLogin = (req: Request, res: Response) => {
     try {
         console.log("getLogin")
         res.render('login');
-    } catch(err) {
+    } catch (err) {
         console.log("Error, getLogin", err)
         res.redirect('/admin');
-    } 
+    }
 };
 
 restaurantController.getSignup = (req: Request, res: Response) => {
     try {
         console.log("getSignup")
         res.render('signup');
-    } catch(err) {
+    } catch (err) {
         console.log("Error, getSignup", err)
         res.redirect('/admin');
-    } 
+    }
 };
 
 
@@ -47,7 +47,7 @@ restaurantController.processSignup = async (req: AdminRequest, res: Response) =>
     try {
         console.log("processSignup")
         const file = req.file;
-        if(!file) 
+        if (!file)
             throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
 
         const newMember: MemberInput = req.body;
@@ -57,15 +57,15 @@ restaurantController.processSignup = async (req: AdminRequest, res: Response) =>
 
         //TODO: set session
         req.session.member = result;
-        req.session.save(function() {
+        req.session.save(function () {
             res.redirect('/admin/product/all');
         });
 
-    } catch(err) {
+    } catch (err) {
         console.log("Error, processSignup", err)
         const message = err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
         res.send(`<script> alert("${message}"); window.location.replace('/admin/signup');</script>`);
-    } 
+    }
 };
 
 
@@ -77,15 +77,15 @@ restaurantController.processLogin = async (req: AdminRequest, res: Response) => 
 
         //TODO: Session auth
         req.session.member = result;
-        req.session.save(function() {
+        req.session.save(function () {
             res.redirect('/admin/product/all');
         });
-        
-    } catch(err) {
+
+    } catch (err) {
         console.log("Error, processLogin", err)
         const message = err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
         res.send(`<script> alert("${message}"); window.location.replace('/admin/login');</script>`);
-    } 
+    }
 };
 
 
@@ -93,13 +93,13 @@ restaurantController.processLogin = async (req: AdminRequest, res: Response) => 
 restaurantController.logout = async (req: AdminRequest, res: Response) => {
     try {
         console.log("processLogin")
-        req.session.destroy(function(err) {
+        req.session.destroy(function (err) {
             res.redirect('/admin');
         });
-    } catch(err) {
+    } catch (err) {
         console.log("Error, processLogin", err)
         res.redirect('/admin');
-    } 
+    }
 };
 
 
@@ -109,12 +109,12 @@ restaurantController.getUsers = async (req: Request, res: Response) => {
         console.log("getUsers")
         const result = await memberService.getUsers();
         console.log("result users:", result)
-        
-        res.render("users", {users: result});
-    } catch(err) {
+
+        res.render("users", { users: result });
+    } catch (err) {
         console.log("Error, getUsers", err)
         res.redirect('/admin/login');
-    } 
+    }
 };
 
 
@@ -123,10 +123,10 @@ restaurantController.updateChosenUser = async (req: Request, res: Response) => {
         console.log("updateChosenUser")
         const result = await memberService.updateChosenUser(req.body);
 
-        res.status(HttpCode.OK).json({data: result});
-    } catch(err) {
+        res.status(HttpCode.OK).json({ data: result });
+    } catch (err) {
         console.log("Error, updateChosenUser", err)
-        if(err instanceof Errors) res.status(err.code).json(err);
+        if (err instanceof Errors) res.status(err.code).json(err);
         else res.status(Errors.standard.code)
     }
 }
@@ -138,15 +138,15 @@ restaurantController.checkAuthSession = async (req: AdminRequest, res: Response)
 
         if (req.session.member) res.send(`<script> alert("Hi ${req.session.member.memberNick}, you are logged in.")</script>`);
         else res.send(`<script> alert("${Message.NOT_AUTHONTICATED}")</script>`);
-    } catch(err) {
+    } catch (err) {
         console.log("Error, checkAuthSession", err)
         res.send(err);
-    } 
+    }
 };
 
 
 restaurantController.verifyRestaurant = (req: AdminRequest, res: Response, next: Function) => {
-    if(req.session.member?.memberType === MemberType.RESTAURANT) {
+    if (req.session.member?.memberType === MemberType.RESTAURANT) {
         req.member = req.session.member;
         next();
     } else {
