@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Errors, { HttpCode, Message } from "../libs/Errors";
+import Errors, { HttpCode, Message } from "../libs/errors";
 import { T } from "../libs/types/comman";
 import ProductService from "../models/Product.service";
 import { ProductInput } from "../libs/types/product";

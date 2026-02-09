@@ -3,7 +3,7 @@ import { T } from "../libs/types/comman";
 import MemberService from "../models/Member.service";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
-import Errors, { HttpCode, Message } from "../libs/Errors";
+import Errors, { HttpCode, Message } from "../libs/errors";
 
 const memberService = new MemberService();
 
@@ -108,7 +108,6 @@ restaurantController.getUsers = async (req: Request, res: Response) => {
     try {
         console.log("getUsers")
         const result = await memberService.getUsers();
-        console.log("result users:", result)
 
         res.render("users", { users: result });
     } catch (err) {
@@ -127,7 +126,7 @@ restaurantController.updateChosenUser = async (req: Request, res: Response) => {
     } catch (err) {
         console.log("Error, updateChosenUser", err)
         if (err instanceof Errors) res.status(err.code).json(err);
-        else res.status(Errors.standard.code)
+        else res.status(Errors.standard.code).json(Errors.standard);
     }
 }
 

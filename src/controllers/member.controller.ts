@@ -2,7 +2,7 @@ import {Request, Response} from "express";
 import {T} from "../libs/types/comman";
 import { LoginInput, Member, MemberInput } from "../libs/types/member";
 import MemberService from "../models/Member.service";
-import Errors from "../libs/Errors";
+import Errors from "../libs/errors";
 
 //React loyiha uchun
 const memberService = new MemberService()
