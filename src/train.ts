@@ -35,22 +35,36 @@
 
 
 
-//MIT Tasks <--O--N--M--L--K--J--I--H2--H--G--F--E--D--C--B--A---------------------------------------
+//MIT Tasks <--P--O--N--M--L--K--J--I--H2--H--G--F--E--D--C--B--A-------------------------
+
+// TASK P:
+// Parametr sifatida yagona object qabul qiladigan function yozing. Qabul qilingan objectni nested array sifatida convert qilib qaytarsin. MASALAN: objectToAray( {a: 10, b: 20}) return [['a', 10], ['b', 20]]
+
+function objectToArray(obj: Record<string, any>): [string, any][] {
+  let result: [string, any][] = [];
+  for (let key in obj) {
+    result.push([key, obj[key]]);
+  }
+  return result;
+}
+console.log(objectToArray({ a: 10, b: 20 }));
+
+
 
 // TASK O:
 // Shunday function yozing va u har xil qiymatlardan iborat array qabul qilsin. Va array ichidagi sonlar yig'indisini hisoblab chiqgan javobni qaytarsin. MASALAN: calculateSumOfNumbers([10, "10", {son: 10}, true, 35]); return 45. Yuqoridagi misolda array tarkibida faqatgina ikkita yagona son mavjud bular 10 hamda 35. Qolganlari nested bo'lib yoki type'lari number emas.
 
-function calculateSum(arr: unknown[]): number {
-  let sum = 0;
-  for (const item of arr) {
-    if (item === Number(item)) {
-      sum += item as number;
-    }
-  }
-  return sum;
-}
-const result = calculateSum([10, "10", { son: 10 }, true, 35]);
-console.log("Sum:", result)
+// function calculateSum(arr: unknown[]): number {
+//   let sum = 0;
+//   for (const item of arr) {
+//     if (item === Number(item)) {
+//       sum += item as number;
+//     }
+//   }
+//   return sum;
+// }
+// const result = calculateSum([10, "10", { son: 10 }, true, 35]);
+// console.log("Sum:", result)
 
 
 
