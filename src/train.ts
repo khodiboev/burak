@@ -36,18 +36,37 @@
 
 
 //MIT Tasks <--P--O--N--M--L--K--J--I--H2--H--G--F--E--D--C--B--A-------------------------
+// TASK Q:
+// Shunday function yozing, u 2 ta parametrga ega bo'lib
+// birinchisi object, ikkinchisi string bo'lsin.
+// Agar qabul qilinayotgan ikkinchi string, objectning
+// biror bir propertysiga mos kelsa, 'true', aks holda mos kelmasa 'false' qaytarsin.
+// MASALAN: hasProperty({ name: "BMW", model: "M3" }, "model"); return true;
+// Ushbu misolda, 'model' string, objectning propertysiga mos kelganligi uchun 'true' natijani qaytarmoqda
+
+function hasProperty(obj: any, key: string): boolean {
+  for (let prop in obj) {
+    if (prop === key) {
+      return true;
+    }
+  }
+  return false;
+}
+console.log(hasProperty({ name: "BMW", model: "M3" }, "model"));
+
+
 
 // TASK P:
 // Parametr sifatida yagona object qabul qiladigan function yozing. Qabul qilingan objectni nested array sifatida convert qilib qaytarsin. MASALAN: objectToAray( {a: 10, b: 20}) return [['a', 10], ['b', 20]]
 
-function objectToArray(obj: Record<string, any>): [string, any][] {
-  let result: [string, any][] = [];
-  for (let key in obj) {
-    result.push([key, obj[key]]);
-  }
-  return result;
-}
-console.log(objectToArray({ a: 10, b: 20 }));
+// function objectToArray(obj: Record<string, any>): [string, any][] {
+//   let result: [string, any][] = [];
+//   for (let key in obj) {
+//     result.push([key, obj[key]]);
+//   }
+//   return result;
+// }
+// console.log(objectToArray({ a: 10, b: 20 }));
 
 
 
