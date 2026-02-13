@@ -35,7 +35,23 @@
 
 
 
-//MIT Tasks <--P--O--N--M--L--K--J--I--H2--H--G--F--E--D--C--B--A-------------------------
+//MIT Tasks <--R--P--O--N--M--L--K--J--I--H2--H--G--F--E--D--C--B--A-------------------------
+// TASK R
+// Shunday function yozing, u string parametrga ega bo'lsin.
+// Agar argument sifatida berilayotgan string, "1 + 2" bo'lsa,
+// string ichidagi sonlarin yig'indisni hisoblab, number holatida qaytarsin
+// MASALAN: calculate("1 + 3"); return 4;
+// 1 + 3 = 4, shu sababli 4 natijani qaytarmoqda.
+
+function calculate(str: string): number {
+  const parts = str.split(" + ");
+  const num1 = Number(parts[0]);
+  const num2 = Number(parts[1]);
+  return num1 + num2;
+}
+console.log(calculate("1 + 3"));
+
+
 // TASK Q:
 // Shunday function yozing, u 2 ta parametrga ega bo'lib
 // birinchisi object, ikkinchisi string bo'lsin.
@@ -44,15 +60,15 @@
 // MASALAN: hasProperty({ name: "BMW", model: "M3" }, "model"); return true;
 // Ushbu misolda, 'model' string, objectning propertysiga mos kelganligi uchun 'true' natijani qaytarmoqda
 
-function hasProperty(obj: any, key: string): boolean {
-  for (let prop in obj) {
-    if (prop === key) {
-      return true;
-    }
-  }
-  return false;
-}
-console.log(hasProperty({ name: "BMW", model: "M3" }, "model"));
+// function hasProperty(obj: any, key: string): boolean {
+//   for (let prop in obj) {
+//     if (prop === key) {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
+// console.log(hasProperty({ name: "BMW", model: "M3" }, "model"));
 
 
 

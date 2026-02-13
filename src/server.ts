@@ -1,9 +1,9 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import mongoose from 'mongoose';
+import mongoo from 'mongoose';
 import app from "./app";
 
-mongoose
+mongoo
     .connect(process.env.MONGO_URL as string, {})
     .then((data) => {
         console.log("MongoDB connection succeed");
