@@ -36,6 +36,23 @@
 
 
 //MIT Tasks <--R--P--O--N--M--L--K--J--I--H2--H--G--F--E--D--C--B--A-------------------------
+// TASK-S:
+// Shunday function yozing, u numberlardan tashkil topgan array qabul qilsin va osha numberlar orasidagi tushib qolgan sonni topib uni return qilsin. MASALAN: missingNumber([3, 0, 1]) return 2
+
+function missingNumber(arr: number[]): number {
+  arr.sort((a, b) => a - b);
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] !== i) {
+      return i;
+    }
+  }
+  return arr.length;
+}
+console.log(missingNumber([3, 0, 1]));
+
+
+
+
 // TASK R
 // Shunday function yozing, u string parametrga ega bo'lsin.
 // Agar argument sifatida berilayotgan string, "1 + 2" bo'lsa,
@@ -43,13 +60,13 @@
 // MASALAN: calculate("1 + 3"); return 4;
 // 1 + 3 = 4, shu sababli 4 natijani qaytarmoqda.
 
-function calculate(str: string): number {
-  const parts = str.split(" + ");
-  const num1 = Number(parts[0]);
-  const num2 = Number(parts[1]);
-  return num1 + num2;
-}
-console.log(calculate("1 + 3"));
+// function calculate(str: string): number {
+//   const parts = str.split(" + ");
+//   const num1 = Number(parts[0]);
+//   const num2 = Number(parts[1]);
+//   return num1 + num2;
+// }
+// console.log(calculate("1 + 3"));
 
 
 // TASK Q:
