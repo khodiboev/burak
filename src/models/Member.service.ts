@@ -5,7 +5,7 @@ import {
   MemberInput,
   MemberUpdateInput,
 } from "../libs/types/member";
-import Errors, { HttpCode, Message } from "../libs/errors";
+import Errors, { HttpCode, Message } from "../libs/Errors";
 import { MemberStatus, MemberType } from "../libs/enums/member.enum";
 import bcrypt from "bcryptjs";
 import { shapeIntoMongooseObjectId } from "../libs/config";
@@ -29,7 +29,7 @@ class MemberService {
       return result.toJSON();
     } catch (err) {
       console.log("Error, MemberService.signup:", err);
-      throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
+      throw new Errors(HttpCode.BAD_REQUEST, Message.USED_NICK_PHONE);
     }
   }
 
@@ -56,7 +56,7 @@ class MemberService {
     );
 
     if (!isMatch) {
-      throw new Errors(HttpCode.UNAUTHORIZED, Message.NO_MEMBER_PASSWORD);
+      throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
     }
 
     return await this.memberModel.findById(member._id).lean().exec();
@@ -110,7 +110,7 @@ class MemberService {
     );
 
     if (!isMatch) {
-      throw new Errors(HttpCode.UNAUTHORIZED, Message.NO_MEMBER_PASSWORD);
+      throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
     }
 
     return await this.memberModel.findById(member._id).exec();
