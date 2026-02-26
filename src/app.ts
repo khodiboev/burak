@@ -54,3 +54,24 @@ app.use("/admin", routerAdmin); //SSR: EJS
 app.use("/", router); //SPA: REACT
 
 export default app;
+
+/*
+BACKEND da oldi berdi Json formatda boladi
+JSON -(JavaScript Object Notation)
+commonly between a server and web applications.
+
+PATTERNS > ARCHITECTURE & DeSIGN  
+AUTHENTICATION/AUTHORIZATION > session vs token
+FRONtEND DEVELOP > BSSR(EJS) va SPA(React)
+
+API REQUEST >
+  TYPE > Traditional API(ejs) | Rest API(json) | GraphQL API
+  METHOD > GET | POST 
+  STRUCTURE > header | body
+
+VALIDATIONS >
+ FRONTEND | 
+ BACKEND | Module ichida shartga to'g'ri kelmasa
+ DATABASE | > Databasedagi talabga to'g'ri kelmasa
+
+*/

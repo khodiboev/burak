@@ -46,8 +46,10 @@
 function chunkArray(arr: number[], size: number): number[][] {
   const result: number[][] = [];
   let temp: number[] = [];
+
   for (let i = 0; i < arr.length; i++) {
     temp.push(arr[i]);
+
     if (temp.length === size) {
       result.push(temp);
       temp = [];
@@ -59,7 +61,7 @@ function chunkArray(arr: number[], size: number): number[][] {
   }
   return result;
 }
-console.log(chunkArray([1,2,3,4,5,6,7,8,9,10], 3));
+console.log(chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
 
 // TASK V
 // Shunday function yozing, uni string parametri bo'lsin.
