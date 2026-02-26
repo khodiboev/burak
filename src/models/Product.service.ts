@@ -1,50 +1,55 @@
 import { HttpCode } from "../libs/errors";
-import { Product, ProductInput, ProductUpdateInput } from "../libs/types/product";
+import {
+  Product,
+  ProductInput,
+  ProductUpdateInput,
+} from "../libs/types/product";
 import ProductModel from "../schema/Product.model";
 import { Message } from "../libs/errors";
 import Errors from "../libs/errors";
 import { shapeIntoMongooseObjectId } from "../libs/config";
 
 class ProductService {
-    private readonly productModel;
+  private readonly productModel;
 
-    constructor() {
-        this.productModel = ProductModel;
-    }
+  constructor() {
+    this.productModel = ProductModel;
+  }
 
-    /** SPA */
+  /** SPA */
 
-    /** SSR */
+  /** SSR */
 
-    public async getAllProducts(): Promise<Product[]> {
-        const result = await this.productModel.find().exec();
-        if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+  public async getAllProducts(): Promise<Product[]> {
+    const result = await this.productModel.find().exec();
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 
-        return result;
-    }   
+    return result;
+  }
 
-
-    public async createNewProduct(input: ProductInput): Promise<Product> {
-        try {
-            return await this.productModel.create(input);
+  public async createNewProduct(input: ProductInput): Promise<Product> {
+    try {
+      return await this.productModel.create(input);
     } catch (err) {
-        console.log("Error, createNewProduct in Product.service", err);
-        throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
+      console.log("Error, createNewProduct in Product.service", err);
+      throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
     }
-    }
+  }
 
-    
-    public async updateChosenProduct(id: string, input: ProductUpdateInput): Promise<Product> {
-        //string => ObjectId                
-        id = shapeIntoMongooseObjectId(id);
-        const result = await this.productModel
-        .findByIdAndUpdate( {_id: id}, input, {new: true})
-        .exec();
-        
-        if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
+  public async updateChosenProduct(
+    id: string,
+    input: ProductUpdateInput,
+  ): Promise<Product> {
+    //string => ObjectId
+    id = shapeIntoMongooseObjectId(id);
+    const result = await this.productModel
+      .findByIdAndUpdate({ _id: id }, input, { new: true })
+      .exec();
 
-        return result;
-    }
+    if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
+
+    return result;
+  }
 }
 
 export default ProductService;
