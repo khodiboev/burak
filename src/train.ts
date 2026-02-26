@@ -31,7 +31,36 @@
   Database validation
 */
 
-//MIT Tasks <--V--U--T--R--P--O--N--M--L--K--J--I--H2--H--G--F--E--D--C--B--A-------------------------
+//MIT Tasks <--W--V--U--T--R--P--O--N--M--L--K--J--I--H2--H--G--F--E--D--C--B--A--
+
+// TASK W
+// Shunday function yozing, u o'ziga parametr sifatida
+// yagona array va number qabul qilsin. Siz tuzgan function
+// arrayni numberda berilgan uzunlikda kesib bo'laklarga
+// ajratgan holatida qaytarsin.
+// MASALAN: chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
+// return [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]];
+// Yuqoridagi namunada berilayotgan array ikkinchi parametr 3'ga
+// asoslanib 3 bo'lakga bo'linib qaytmoqda. Qolgani esa o'z holati qolyapti
+
+function chunkArray(arr: number[], size: number): number[][] {
+  const result: number[][] = [];
+  let temp: number[] = [];
+  for (let i = 0; i < arr.length; i++) {
+    temp.push(arr[i]);
+    if (temp.length === size) {
+      result.push(temp);
+      temp = [];
+    }
+  }
+  // Agar oxirida qolgan elementlar bo‘lsa
+  if (temp.length > 0) {
+    result.push(temp);
+  }
+  return result;
+}
+console.log(chunkArray([1,2,3,4,5,6,7,8,9,10], 3));
+
 // TASK V
 // Shunday function yozing, uni string parametri bo'lsin.
 // Va bu function stringdagi har bir harfni o'zi bilan
@@ -41,18 +70,18 @@
 // qatnashgan harflar necha marotaba takrorlangini bilan
 // object sifatida qaytarilmoqda.
 
-function countChars(str: string): { [key: string]: number } {
-  const result: { [key: string]: number } = {};
-  for (let char of str) {
-    if (result[char]) {
-      result[char]++;
-    } else {
-      result[char] = 1;
-    }
-  }
-  return result;
-}
-console.log(countChars("hello"));
+// function countChars(str: string): { [key: string]: number } {
+//   const result: { [key: string]: number } = {};
+//   for (let char of str) {
+//     if (result[char]) {
+//       result[char]++;
+//     } else {
+//       result[char] = 1;
+//     }
+//   }
+//   return result;
+// }
+// console.log(countChars("hello"));
 
 // TASK U
 // Shunday function tuzing, uni number parametri bo'lsin.
