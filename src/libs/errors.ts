@@ -22,6 +22,7 @@ export enum Message {
   NOT_FOUND = "member not found!",
   NOT_AUTHONTICATED = "you are not authenticated, login first!",
   TOKEN_CREATION_FAILED = "token creation failed!",
+  NOT_AUTHORIZED = "NOT_AUTHORIZED",
 }
 
 class Errors extends Error {
