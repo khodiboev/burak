@@ -9,6 +9,7 @@ import { Message } from "../libs/Errors";
 import Errors from "../libs/Errors";
 import { shapeIntoMongooseObjectId } from "../libs/config";
 
+
 class ProductService {
   private readonly productModel;
 
@@ -20,6 +21,7 @@ class ProductService {
 
   /** SSR */
 
+  // getallproducts asinxron objectini, typei product bo'gan array qaytaradi
   public async getAllProducts(): Promise<Product[]> {
     const result = await this.productModel.find().exec();
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
@@ -27,6 +29,7 @@ class ProductService {
     return result;
   }
 
+  // getchosenproduct asinxron objectini, typei product bo'lgan array qaytaradi
   public async createNewProduct(input: ProductInput): Promise<Product> {
     try {
       return await this.productModel.create(input);
@@ -36,6 +39,7 @@ class ProductService {
     }
   }
 
+  // updatechosenproduct asinxron objectini id va input parametri bor va typei product bo'lgan array qaytaradi
   public async updateChosenProduct(
     id: string,
     input: ProductUpdateInput,

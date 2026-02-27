@@ -13,11 +13,13 @@ const productController: T = {};
 
 /** SSR */
 
+// productController objectining getAllProducts methodi, req va res parametrlarini qabul qiladi.
 productController.getAllProducts = async (req: Request, res: Response) => {
   try {
     console.log("getAllProducts");
     const data = await productService.getAllProducts();
 
+    // products nomli view ni render qiladi va unga data ni uzatadi.
     res.render("products", { products: data });
   } catch (err) {
     console.log("Error, getAllProducts", err);
@@ -26,6 +28,8 @@ productController.getAllProducts = async (req: Request, res: Response) => {
   }
 };
 
+
+// productController objectining createNewProduct methodi, req va res parametrlarini qabul qiladi.
 productController.createNewProduct = async (
   req: AdminRequest,
   res: Response,
@@ -35,14 +39,17 @@ productController.createNewProduct = async (
     console.log("req.body:", req.body);
     console.log("req.files:", req.files);
 
+    // Agar rasm yuklanmagan bo'lsa, xatolik xabarini qaytaradi.
     if (!req.files?.length)
       throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATE_FAILED);
 
+    // req.body dan ma'lumotlarni oladi va productImages maydonini req.files dan olingan rasm yo'llari bilan to'ldiradi.
     const data: ProductInput = req.body;
     data.productImages = req.files?.map((ele) => {
       return ele.path.replace(/\\/g, "/");
     });
 
+    // productService ning createNewProduct metodini chaqiradi va unga data ni uzatadi.
     await productService.createNewProduct(data);
     res.send(
       `<script>alert("Product created successfully!"); window.location.replace('/admin/product/all') </script>`,
@@ -57,8 +64,10 @@ productController.createNewProduct = async (
   }
 };
 
+// productController objectining updateChosenProduct methodi, req va res parametrlarini qabul qiladi.
 productController.updateChosenProduct = async (req: Request, res: Response) => {
   try {
+    // productId ni req.params.id dan oladi va productService ning updateChosenProduct metodini chaqiradi va unga productId va req.body ni uzatadi.
     console.log("updateChosenProduct");
     const productId = req.params.id;
 

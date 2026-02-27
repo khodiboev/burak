@@ -33,6 +33,45 @@
 
 //MIT Tasks <--W--V--U--T--R--P--O--N--M--L--K--J--I--H2--H--G--F--E--D--C--B--A--
 
+// TASK X
+// Shunday function yozing, uni object va string parametrlari bo'lsin.
+// Bu function, birinchi object parametri tarkibida, kalit sifatida ikkinchi string parametri
+// necha marotaba takrorlanganlini sanab qaytarsin.
+// Eslatma => Nested object'lar ham sanalsin
+// MASALAN: countOccurrences({model: 'Bugatti', steer: {model: 'HANKOOK', size: 30}}, 'model') return 2
+// Yuqoridagi misolda, birinchi argument object, ikkinchi argument 'model'.
+// Funktsiya, shu ikkinchi argument 'model', birinchi argument object
+// tarkibida kalit sifatida 2 marotaba takrorlanganligi uchun 2 soni return qilmoqda
+
+function countOccurrences(obj: unknown, key: string): number {
+  // null yoki object bo'lmasa => ichiga kira olmaymiz
+  if (obj === null || typeof obj !== "object") return 0;
+  let count = 0;
+  // Array ham object hisoblanadi, shuning uchun uni ham yurib chiqamiz
+  if (Array.isArray(obj)) {
+    for (const item of obj) {
+      count += countOccurrences(item, key);
+    }
+    return count;
+  }
+  // Oddiy object
+  const record = obj as Record<string, unknown>;
+  for (const k in record) {
+    if (Object.prototype.hasOwnProperty.call(record, k)) {
+      if (k === key) count++;
+      // nested object bo'lsa ichiga kirib ketamiz
+      count += countOccurrences(record[k], key);
+    }
+  }
+  return count;
+}
+console.log(
+  countOccurrences(
+    { model: "Bugatti", steer: { model: "HANKOOK", size: 30 } },
+    "model"
+  )
+);
+
 // TASK W
 // Shunday function yozing, u o'ziga parametr sifatida
 // yagona array va number qabul qilsin. Siz tuzgan function
@@ -43,25 +82,25 @@
 // Yuqoridagi namunada berilayotgan array ikkinchi parametr 3'ga
 // asoslanib 3 bo'lakga bo'linib qaytmoqda. Qolgani esa o'z holati qolyapti
 
-function chunkArray(arr: number[], size: number): number[][] {
-  const result: number[][] = [];
-  let temp: number[] = [];
+// function chunkArray(arr: number[], size: number): number[][] {
+//   const result: number[][] = [];
+//   let temp: number[] = [];
 
-  for (let i = 0; i < arr.length; i++) {
-    temp.push(arr[i]);
+//   for (let i = 0; i < arr.length; i++) {
+//     temp.push(arr[i]);
 
-    if (temp.length === size) {
-      result.push(temp);
-      temp = [];
-    }
-  }
-  // Agar oxirida qolgan elementlar bo‘lsa
-  if (temp.length > 0) {
-    result.push(temp);
-  }
-  return result;
-}
-console.log(chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
+//     if (temp.length === size) {
+//       result.push(temp);
+//       temp = [];
+//     }
+//   }
+//   // Agar oxirida qolgan elementlar bo‘lsa
+//   if (temp.length > 0) {
+//     result.push(temp);
+//   }
+//   return result;
+// }
+// console.log(chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
 
 // TASK V
 // Shunday function yozing, uni string parametri bo'lsin.
