@@ -19,6 +19,20 @@ class MemberService {
 
   /** SPA */
 
+  // memberService objectining asinxron getRestaurant methodi. Asinxron bolgani uchun Member tipida bo'lgan datani qaytaradi.
+  public async getRestaurant(): Promise<Member> {
+    // memberModel ning findOne methodini chaqirish orqali memberTypei RESTAURANT ga teng bo'lgan member ni topish. Natijani result o'zgaruvchisiga saqlash. Agar result topilmasa, HttpCode.NOT_FOUND va Message.NO_DATA_FOUND bilan yangi Errors ni throw qilish. Bu yerda RESTAURANT tipidagi member faqat bitta bo'lishi mumkinligi tekshirilmoqda.
+    const result = await this.memberModel
+      .findOne({ MemberType: MemberType.RESTAURANT })
+      // lean() methodi Mongoose document ni oddiy JavaScript object ga aylantiradi. Bu, agar sizga Mongoose document ning metodlari yoki virtuals kerak bo'lmasa, performansni yaxshilash uchun foydalidir.
+      .lean()
+      .exec();
+    result.target = "Test";
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+    return result;
+  }
+
   // memberService objectining signup methodi, input parametri mavjud. MemberInput tipida bo'lgan inputni qabul qiladi va natijada yangi yaratilgan Member ni qaytaradi.
   public async signup(input: MemberInput): Promise<Member> {
     // bcrypt kutubxonasining genSalt methodi yordamida salt yaratish va natijani salt o'zgaruvchisiga saqlash. Salt bu parolni hash qilishda qo'shiladigan tasodifiy ma'lumot bo'lib, parolni yanada xavfsiz qilishga yordam beradi.
@@ -97,7 +111,6 @@ class MemberService {
 
     return result;
   }
-
 
   // memberService objectining getTopUsers methodi, top users ni olish uchun ishlatiladi va natijada Member array ni qaytaradi. Bu method memberStatusi ACTIVE ga teng bo'lgan va memberPointsi 1 yoki undan katta bo'lgan memberlarni memberPoints bo'yicha kamayish tartibida sort qiladi va faqat 4 ta natija qaytaradi.
   public async getTopUsers(): Promise<Member[]> {
