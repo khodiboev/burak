@@ -10,14 +10,17 @@ import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
 import { T } from "./libs/types/common";
 
+// MongoDBStore ni yaratish uchun ConnectMongoDB ni session bilan birga chaqirish.
 const MongoDBStore = ConnectMongoDB(session);
 
+// MongoDBStore ni yaratish uchun kerakli konfiguratsiyalarni berish. uri sifatida MONGO_URL environment variable dan olinadi va collection nomi "sessions" deb belgilanadi.
 const store = new MongoDBStore({
   uri: String(process.env.MONGO_URL),
   collection: "sessions",
 });
 
 /**1-Entrance**/
+// Express app ni yaratish va kerakli middleware larni o'rnatish. express.static middleware yordamida public papkasini statik fayllar uchun ishlatish va uploads papkasini rasm fayllari uchun ishlatish. express.urlencoded va express.json middleware larini o'rnatish, bu middleware lar incoming request body ni req.body ga parse qiladi. cookieParser middleware ni o'rnatish, bu middleware cookies ni parse qiladi va req.cookies ga qo'shadi. morgan middleware ni o'rnatish, bu middleware HTTP requestlarni log qiladi va MORGAN_FORMAT formatida loglarni chiqaradi.
 const app = express();
 console.log("__dirname", __dirname);
 app.use(express.static(path.join(__dirname, "public")));
@@ -27,7 +30,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(morgan(MORGAN_FORMAT));
 
+
 /**2-sessions**/
+// express-session middleware ni o'rnatish, bu middleware sessionlarni boshqarish uchun ishlatiladi. secret sifatida SESSION_SECRET environment variable dan olinadi, cookie ning maxAge ni 6 soatga o'rnatish, store sifatida oldin yaratgan MongoDBStore ni berish, resave va saveUninitialized optionlarini true ga o'rnatish. resave true bo'lsa, har bir request da session saqlanadi, saveUninitialized true bo'lsa, yangi yaratilgan lekin o'zgartirilmagan session ham saqlanadi.
 app.use(
   session({
     secret: String(process.env.SESSION_SECRET),
@@ -46,11 +51,15 @@ app.use(function (req, res, next) {
   next();
 });
 
+
 /**3-views**/
+// Express app ning views papkasini __dirname/views ga o'rnatish va view engine sifatida ejs ni belgilash. Bu konfiguratsiya Express ga views papkasida joylashgan EJS fayllarini render qilish imkonini beradi.
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+
 /**4-routers**/
+// app.use yordamida routerAdmin ni "/admin" pathiga o'rnatish, bu routerAdmin ning barcha route lari "/admin" prefixi bilan ishlaydi. app.use yordamida router ni "/" pathiga o'rnatish, bu router ning barcha route lari asosiy pathda ishlaydi. routerAdmin SSR uchun EJS fayllarini render qiladi, router esa SPA uchun React ga xizmat qiladi.
 app.use("/admin", routerAdmin); //SSR: EJS
 app.use("/", router); //SPA: REACT
 

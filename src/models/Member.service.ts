@@ -36,7 +36,6 @@ class MemberService {
     }
   }
 
-
   // memberService objectining login methodi, input parametri mavjud. LoginInput tipida bo'lgan inputni qabul qiladi va natijada Member ni qaytaradi.
   public async login(input: LoginInput): Promise<Member> {
     //TODO: consider member status
@@ -71,7 +70,6 @@ class MemberService {
     return await this.memberModel.findById(member._id).lean().exec();
   }
 
-
   // memberService objectining getMemberDetail methodi, member parametri mavjud. Member tipida bo'lgan member ni qabul qiladi va natijada Member ni qaytaradi.
   public async getMemberDetail(member: Member): Promise<Member> {
     const memberId = shapeIntoMongooseObjectId(member._id);
@@ -81,7 +79,6 @@ class MemberService {
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
     return result;
   }
-
 
   // Define: memberService objectining updateMember methodi, member va input parametrlari mavjud. Member tipida bo'lgan member ni update qilish uchun MemberUpdateInput tipida bo'lgan input ni qabul qiladi va natijada yangilangan Member ni qaytaradi.
   public async updateMember(
@@ -101,9 +98,25 @@ class MemberService {
     return result;
   }
 
+
+  // memberService objectining getTopUsers methodi, top users ni olish uchun ishlatiladi va natijada Member array ni qaytaradi. Bu method memberStatusi ACTIVE ga teng bo'lgan va memberPointsi 1 yoki undan katta bo'lgan memberlarni memberPoints bo'yicha kamayish tartibida sort qiladi va faqat 4 ta natija qaytaradi.
+  public async getTopUsers(): Promise<Member[]> {
+    const result = await this.memberModel
+      .find({
+        memberStatus: MemberStatus.ACTIVE,
+        memberPoints: { $gte: 1 },
+      })
+      .sort({ memberPoints: -1 })
+      .limit(4)
+      .exec();
+
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+    return result;
+  }
+
   // =========================================================
   /** SSR */
-
 
   // memberService objectining processSignup methodi, input parametri mavjud. MemberInput tipida bo'lgan inputni qabul qiladi va natijada yangi yaratilgan Member ni qaytaradi.
   public async processSignup(input: MemberInput): Promise<Member> {
@@ -127,8 +140,6 @@ class MemberService {
     }
   }
 
-
-
   public async processLogin(input: LoginInput): Promise<Member> {
     const member = await this.memberModel
       .findOne(
@@ -151,8 +162,6 @@ class MemberService {
     return await this.memberModel.findById(member._id).exec();
   }
 
-
-
   public async getUsers(): Promise<Member[]> {
     const result = await this.memberModel
       .find({ memberType: MemberType.USER })
@@ -161,7 +170,6 @@ class MemberService {
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
     return result;
   }
-
 
   // memberService objectining updateChosenUser methodi, input parametri mavjud. MemberUpdateInput tipida bo'lgan inputni qabul qiladi va natijada yangilangan Member ni qaytaradi.
   public async updateChosenUser(input: MemberUpdateInput): Promise<Member> {

@@ -37,6 +37,10 @@ router.post(
   memberController.updateMember
 );
 
+
+// Top users ni olish uchun route. Bu route ga GET request yuborilganda, memberController.getTopUsers methodi chaqiriladi va top users ni qaytaradi.
+router.get("/member/top-users", memberController.getTopUsers);
+
 /** Product */
 
 /** Order */
