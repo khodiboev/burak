@@ -31,7 +31,38 @@
   Database validation
 */
 
-//MIT Tasks <--W--V--U--T--R--P--O--N--M--L--K--J--I--H2--H--G--F--E--D--C--B--A--
+//MIT Tasks <--Y--W--V--U--T--R--P--O--N--M--L--K--J--I--H2--H--G--F--E--D--C--B--A--
+// TASK Y
+// Shunday function yozing, uni 2'ta array parametri bo'lsin.
+// Bu function ikkala arrayda ham ishtirok etgan bir xil
+// qiymatlarni yagona arrayga joylab qaytarsin.
+// MASALAN: findIntersection([1,2,3], [3,2,0]) return [2,3]
+// Yuqoridagi misolda, argument sifatida berilayotgan array'larda
+// o'xshash sonlar mavjud. Function'ning vazifasi esa ana shu
+// ikkala array'da ishtirok etgan o'xshash sonlarni yagona arrayga
+// joylab return qilmoqda.
+
+function findIntersection(arr1: number[], arr2: number[]): number[] {
+  // Natijani saqlash uchun bo'sh array
+  const result: number[] = [];
+  // Birinchi array bo'ylab yuramiz
+  for (let i: number = 0; i < arr1.length; i++) {
+    // Ikkinchi array bo'ylab yuramiz
+    for (let j: number = 0; j < arr2.length; j++) {
+      // Agar qiymatlar teng bo'lsa
+      if (arr1[i] === arr2[j]) {
+        // Agar result ichida hali mavjud bo'lmasa
+        if (!result.includes(arr1[i])) {
+          // result arrayga qo'shamiz
+          result.push(arr1[i]);
+        }
+      }
+    }
+  }
+  // Oxirida natijani qaytaramiz
+  return result;
+}
+console.log(findIntersection([1, 2, 3], [3, 2, 0]));
 
 // TASK X
 // Shunday function yozing, uni object va string parametrlari bo'lsin.
@@ -43,34 +74,34 @@
 // Funktsiya, shu ikkinchi argument 'model', birinchi argument object
 // tarkibida kalit sifatida 2 marotaba takrorlanganligi uchun 2 soni return qilmoqda
 
-function countOccurrences(obj: unknown, key: string): number {
-  // null yoki object bo'lmasa => ichiga kira olmaymiz
-  if (obj === null || typeof obj !== "object") return 0;
-  let count = 0;
-  // Array ham object hisoblanadi, shuning uchun uni ham yurib chiqamiz
-  if (Array.isArray(obj)) {
-    for (const item of obj) {
-      count += countOccurrences(item, key);
-    }
-    return count;
-  }
-  // Oddiy object
-  const record = obj as Record<string, unknown>;
-  for (const k in record) {
-    if (Object.prototype.hasOwnProperty.call(record, k)) {
-      if (k === key) count++;
-      // nested object bo'lsa ichiga kirib ketamiz
-      count += countOccurrences(record[k], key);
-    }
-  }
-  return count;
-}
-console.log(
-  countOccurrences(
-    { model: "Bugatti", steer: { model: "HANKOOK", size: 30 } },
-    "model"
-  )
-);
+// function countOccurrences(obj: unknown, key: string): number {
+//   // null yoki object bo'lmasa => ichiga kira olmaymiz
+//   if (obj === null || typeof obj !== "object") return 0;
+//   let count = 0;
+//   // Array ham object hisoblanadi, shuning uchun uni ham yurib chiqamiz
+//   if (Array.isArray(obj)) {
+//     for (const item of obj) {
+//       count += countOccurrences(item, key);
+//     }
+//     return count;
+//   }
+//   // Oddiy object
+//   const record = obj as Record<string, unknown>;
+//   for (const k in record) {
+//     if (Object.prototype.hasOwnProperty.call(record, k)) {
+//       if (k === key) count++;
+//       // nested object bo'lsa ichiga kirib ketamiz
+//       count += countOccurrences(record[k], key);
+//     }
+//   }
+//   return count;
+// }
+// console.log(
+//   countOccurrences(
+//     { model: "Bugatti", steer: { model: "HANKOOK", size: 30 } },
+//     "model"
+//   )
+// );
 
 // TASK W
 // Shunday function yozing, u o'ziga parametr sifatida
