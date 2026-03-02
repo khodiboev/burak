@@ -94,6 +94,8 @@ class MemberService {
     return result;
   }
 
+
+
   // Define: memberService objectining updateMember methodi, member va input parametrlari mavjud. Member tipida bo'lgan member ni update qilish uchun MemberUpdateInput tipida bo'lgan input ni qabul qiladi va natijada yangilangan Member ni qaytaradi.
   public async updateMember(
     member: Member,
@@ -112,6 +114,8 @@ class MemberService {
     return result;
   }
 
+
+  
   // memberService objectining getTopUsers methodi, top users ni olish uchun ishlatiladi va natijada Member array ni qaytaradi. Bu method memberStatusi ACTIVE ga teng bo'lgan va memberPointsi 1 yoki undan katta bo'lgan memberlarni memberPoints bo'yicha kamayish tartibida sort qiladi va faqat 4 ta natija qaytaradi.
   public async getTopUsers(): Promise<Member[]> {
     const result = await this.memberModel

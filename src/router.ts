@@ -2,13 +2,13 @@ import express from "express";
 const router = express.Router();
 import memberController from "./controllers/member.controller";
 import uploader from "./libs/utils/uploader";
+import productController from "./controllers/product.controller";
 
 /** Member */
 router.get("/member/restaurant", memberController.getRestaurant);
 
 router.post("/member/login", memberController.login);
 router.post("/member/signup", memberController.signup);
-
 
 router.post(
   "/member/logout",
@@ -18,7 +18,6 @@ router.post(
   memberController.logout,
 );
 
-
 router.get(
   "/member/detail",
   // Authonticated bo'lgan userga ruxsat berish
@@ -27,23 +26,25 @@ router.get(
   memberController.getMemberDetail,
 );
 
-
 router.post(
   "/member/update",
   // Authonticated bo'lgan userga ruxsat berish
-  memberController.verifyAuth, 
+  memberController.verifyAuth,
   // Rasmni upload qilish uchun middleware
   // "memberImage" nomi bilan rasmni qabul qilib va uni "members" papkasiga saqlash
   uploader("members").single("memberImage"),
   // Member ma'lumotlarini update qilish uchun controller
-  memberController.updateMember
+  memberController.updateMember,
 );
-
 
 // Top users ni olish uchun route. Bu route ga GET request yuborilganda, memberController.getTopUsers methodi chaqiriladi va top users ni qaytaradi.
 router.get("/member/top-users", memberController.getTopUsers);
 
+
 /** Product */
+
+// getProducts route. Bu route ga GET request yuborilganda, productController.getProducts methodi chaqiriladi va products ni qaytaradi. Bu route da query parametrlari orqali products ni filtrlash, sort qilish va pagination qilish mumkin.
+router.get("/product/all", productController.getProducts);
 
 /** Order */
 

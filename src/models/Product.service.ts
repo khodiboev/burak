@@ -2,13 +2,15 @@ import { HttpCode } from "../libs/Errors";
 import {
   Product,
   ProductInput,
+  ProductInquiry,
   ProductUpdateInput,
 } from "../libs/types/product";
 import ProductModel from "../schema/Product.model";
 import { Message } from "../libs/Errors";
 import Errors from "../libs/Errors";
 import { shapeIntoMongooseObjectId } from "../libs/config";
-
+import { ProductStatus } from "../libs/enums/product.enum";
+import { T } from "../libs/types/common";
 
 class ProductService {
   private readonly productModel;
@@ -18,6 +20,38 @@ class ProductService {
   }
 
   /** SPA */
+
+  // getproducts asinxron objectini, typei product bo'gan array qaytaradi
+  public async getProducts(inquiry: ProductInquiry): Promise<Product[]> {
+    const match: T = { ProductStatus: ProductStatus.PROCESS };
+
+    // productCollection va search query parametrlari mavjud bo'lsa, match objectiga ularni qo'shish. Bu match objecti MongoDB aggregate pipeline da $match stage uchun ishlatiladi.
+    if (inquiry.productCollection)
+      match.productCollection = inquiry.productCollection;
+
+    if(inquiry.search) {
+      match.productName = { $regex: new RegExp(inquiry.search, "i") };
+    }
+
+    // order query parametri bo'yicha sort qilish. Agar order "productPrice" bo'lsa, sort 1 (o'sish tartibi) bo'ladi, aks holda -1 (kamayish tartibi) bo'ladi. Bu sort objecti MongoDB aggregate pipeline da $sort stage uchun ishlatiladi.
+    const sort: T =
+      inquiry.order === "productPrice"
+        ? { [inquiry.order]: 1 }
+        : { [inquiry.order]: -1 };
+
+    // MongoDB aggregate pipeline ni ishlatish. $match stage da match objecti, $sort stage da sort objecti, $skip stage da pagination uchun kerakli miqdorda hujjatlarni o'tkazib yuborish, $limit stage da esa kerakli miqdorda hujjatlarni olish.
+    const result = await this.productModel
+      .aggregate([
+        { $match: match },
+        { $sort: sort },
+        { $skip: (inquiry.page * 1 - 1) * inquiry.limit },
+        { $limit: inquiry.limit * 1},
+      ])
+      .exec();
+
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result;
+  }
 
   /** SSR */
 

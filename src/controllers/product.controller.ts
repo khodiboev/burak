@@ -2,14 +2,49 @@ import { Request, Response } from "express";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { T } from "../libs/types/common";
 import ProductService from "../models/Product.service";
-import { ProductInput } from "../libs/types/product";
+import { ProductInput, ProductInquiry } from "../libs/types/product";
 import { AdminRequest } from "../libs/types/member";
+import { ProductCollection } from "../libs/enums/product.enum";
 
 const productService = new ProductService();
 
 const productController: T = {};
 
 /** SPA */
+productController.getProducts = async (req: Request, res: Response) => {
+  try {
+    // query bu - URL da ? dan keyin yozilgan ma'lumotlarni olish uchun ishlatiladi. Masalan, agar URL "http://example.com/products?category=electronics" bo'lsa, req.query.category orqali "electronics" qiymatini olish mumkin.
+    // const query = req.query;
+    // console.log("req.query", query);
+
+    // params bu - URL da :key nomi bilan yozilgan ma'lumotlarni olish uchun ishlatiladi. Masalan, agar route "/product/:id" bo'lsa va URL "http://example.com/product/123" bo'lsa, req.params.id orqali "123" qiymatini olish mumkin.
+    // const params = req.params;
+    // console.log("req.params", params);
+
+
+    // query dan page, limit, order, productCollection va search ni olish. inquiry objecti ProductInquiry typeiga ega bo'ladi va getProducts methodiga uzatiladi.
+    console.log("getProducts");
+    const { page, limit, order, productCollection, search } = req.query;
+    const inquiry: ProductInquiry = {
+      order: String(order),
+      page: Number(page),
+      limit: Number(limit),
+    };
+
+    // Agar productCollection query parametri mavjud bo'lsa, inquiry objectiga productCollection ni qo'shish. Agar search query parametri mavjud bo'lsa, inquiry objectiga search ni qo'shish. Bu inquiry objecti getProducts methodiga uzatiladi va unga asoslanib mahsulotlar filtrlash va qidirish amalga oshiriladi.
+    if (productCollection)
+      inquiry.productCollection = productCollection as ProductCollection;
+    if (search) inquiry.search = String(search);
+
+    const result = await productService.getProducts(inquiry);
+
+    res.status(HttpCode.OK).json(result);
+  } catch (err) {
+    console.log("Error, getProducts", err);
+    if (err instanceof Errors) res.status(err.code).json({ err });
+    else res.status(Errors.standard.code).json(Errors.standard);
+  }
+};
 
 /** SSR */
 
@@ -27,7 +62,6 @@ productController.getAllProducts = async (req: Request, res: Response) => {
     else res.status(Errors.standard.code).json(Errors.standard);
   }
 };
-
 
 // productController objectining createNewProduct methodi, req va res parametrlarini qabul qiladi.
 productController.createNewProduct = async (

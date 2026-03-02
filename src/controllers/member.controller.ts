@@ -121,14 +121,14 @@ memberController.getMemberDetail = async (
 
 
 
-// memberController objectining updateMember methodi, req va res parametrlari mavjud. Nima uchun req ExtendedRequest tipida - chunki member.ts fileda Requestdan interface olganmiz va unda user bitta file yoki birnechta file kiritganini tekshirish uchun.
+// memberController objectining updateMember methodi, req va res parametrlari mavjud. Nima uchun req ExtendedRequest tipida - chunki member.ts fileda Requestdan interface olganmiz va unda user bitta file yoki birnechta files kiritganini tekshirish uchun.
 memberController.updateMember = async (req: ExtendedRequest, res: Response) => {
   try {
     console.log("updateMember");
     // postman orqali yuborilgan form-data req.body qismida kirib keladi va uni MemberUpdateInput tipidagi input o'zgaruvchisiga saqlash.
     const input: MemberUpdateInput = req.body;
     // Agar req.file mavjud bo'lsa, input.memberImage ni req.file.path ga o'rnatish. Bu yerda req.file multer middleware tomonidan yaratilgan file obyekti bo'lib, uning path property si file ning saqlangan joyini ko'rsatadi.
-    if (req.file) input.memberImage = req.file.path.replace(/\\/, "/");
+    if (req.file) input.memberImage = req.file.path.replace(/\\/g, "/");
     // memberService objectining updateMember methodiga argument sifatida req.member va update bolishi kerak bolgan malumotlar yani input ni pass qilib, member ma'lumotlarini update qilish va natijani qaytarish. Natija Member tipida bo'ladi.
     const result = await memberService.updateMember(req.member, input);
 
