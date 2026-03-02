@@ -11,12 +11,18 @@ import Errors from "../libs/Errors";
 import { shapeIntoMongooseObjectId } from "../libs/config";
 import { ProductStatus } from "../libs/enums/product.enum";
 import { T } from "../libs/types/common";
+import { ObjectId } from "mongoose";
+import ViewService from "./View.service";
+import { ViewInput } from "../libs/types/view";
+import { ViewGroup } from "../libs/enums/view.enum";
 
 class ProductService {
   private readonly productModel;
+  public viewService;
 
   constructor() {
     this.productModel = ProductModel;
+    this.viewService = new ViewService();
   }
 
   /** SPA */
@@ -29,7 +35,7 @@ class ProductService {
     if (inquiry.productCollection)
       match.productCollection = inquiry.productCollection;
 
-    if(inquiry.search) {
+    if (inquiry.search) {
       match.productName = { $regex: new RegExp(inquiry.search, "i") };
     }
 
@@ -45,11 +51,51 @@ class ProductService {
         { $match: match },
         { $sort: sort },
         { $skip: (inquiry.page * 1 - 1) * inquiry.limit },
-        { $limit: inquiry.limit * 1},
+        { $limit: inquiry.limit * 1 },
       ])
       .exec();
 
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result;
+  }
+
+  // getproduct asinxron objectini, typei product bo'lgan array qaytaradi. Agar memberId mavjud bo'lsa, productni olishdan oldin view loglarini tekshirish va yangilash amalga oshiriladi.
+  public async getProduct(
+    memberId: ObjectId | null,
+    id: string,
+  ): Promise<Product> {
+    const productId = shapeIntoMongooseObjectId(id);
+    let result = await this.productModel
+      .findOne({ _id: productId, ProductStatus: ProductStatus.PROCESS })
+      .exec();
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+    if (memberId) {
+      // check existence
+      const input: ViewInput = {
+        memberId: memberId,
+        viewGroup: ViewGroup.PRODUCT,
+        viewRefId: productId,
+      };
+
+      const existView = await this.viewService.checkViewExicistence(input);
+
+      console.log("existView", !!existView);
+      if (!existView) {
+        // insert new view log
+        await this.viewService.insertMemberView(input);
+
+        // increase counts
+        result = await this.productModel
+          .findByIdAndUpdate(
+            productId,
+            { $inc: { productViews: +1 } },
+            { new: true },
+          )
+          .exec();
+      }
+    }
+
     return result;
   }
 

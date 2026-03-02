@@ -40,11 +40,15 @@ router.post(
 // Top users ni olish uchun route. Bu route ga GET request yuborilganda, memberController.getTopUsers methodi chaqiriladi va top users ni qaytaradi.
 router.get("/member/top-users", memberController.getTopUsers);
 
-
 /** Product */
 
 // getProducts route. Bu route ga GET request yuborilganda, productController.getProducts methodi chaqiriladi va products ni qaytaradi. Bu route da query parametrlari orqali products ni filtrlash, sort qilish va pagination qilish mumkin.
 router.get("/product/all", productController.getProducts);
+router.get(
+  "/product/:id",
+  memberController.retrieveAuth,
+  productController.getProduct,
+);
 
 /** Order */
 

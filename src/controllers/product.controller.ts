@@ -3,7 +3,7 @@ import Errors, { HttpCode, Message } from "../libs/Errors";
 import { T } from "../libs/types/common";
 import ProductService from "../models/Product.service";
 import { ProductInput, ProductInquiry } from "../libs/types/product";
-import { AdminRequest } from "../libs/types/member";
+import { AdminRequest, ExtendedRequest } from "../libs/types/member";
 import { ProductCollection } from "../libs/enums/product.enum";
 
 const productService = new ProductService();
@@ -20,7 +20,6 @@ productController.getProducts = async (req: Request, res: Response) => {
     // params bu - URL da :key nomi bilan yozilgan ma'lumotlarni olish uchun ishlatiladi. Masalan, agar route "/product/:id" bo'lsa va URL "http://example.com/product/123" bo'lsa, req.params.id orqali "123" qiymatini olish mumkin.
     // const params = req.params;
     // console.log("req.params", params);
-
 
     // query dan page, limit, order, productCollection va search ni olish. inquiry objecti ProductInquiry typeiga ega bo'ladi va getProducts methodiga uzatiladi.
     console.log("getProducts");
@@ -41,6 +40,23 @@ productController.getProducts = async (req: Request, res: Response) => {
     res.status(HttpCode.OK).json(result);
   } catch (err) {
     console.log("Error, getProducts", err);
+    if (err instanceof Errors) res.status(err.code).json({ err });
+    else res.status(Errors.standard.code).json(Errors.standard);
+  }
+};
+
+// getProduct methodi, req va res parametrlarini qabul qiladi. req.params.id orqali productId ni oladi va productService ning getProduct metodini chaqiradi va unga memberId (agar mavjud bo'lsa) va productId ni uzatadi. Agar ma'lumot muvaffaqiyatli olingan bo'lsa, natijani JSON formatida qaytaradi. Agar xatolik yuz bersa, xatolik xabarini qaytaradi.
+productController.getProduct = async (req: ExtendedRequest, res: Response) => {
+  try {
+    console.log("getProduct");
+    const { id } = req.params;
+    console.log("req.member", req.member);
+    const memberId = req.member?._id ?? null,
+      result = await productService.getProduct(memberId, id);
+
+    res.status(HttpCode.OK).json(result);
+  } catch (err) {
+    console.log("Error, getProduct", err);
     if (err instanceof Errors) res.status(err.code).json({ err });
     else res.status(Errors.standard.code).json(Errors.standard);
   }
