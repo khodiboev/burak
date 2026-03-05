@@ -52,16 +52,25 @@ router.get(
 );
 
 /** Order */
+
+// createOrder route. Bu route ga POST request yuborilganda, memberController.verifyAuth middleware orqali userning authenticated ekanligi tekshiriladi. Agar user authenticated bo'lsa, orderController.createOrder methodi chaqiriladi va yangi order yaratiladi.
 router.post(
   "/order/create",
   memberController.verifyAuth,
   orderController.createOrder,
 );
 
+// getMyOrders route. Bu route ga GET request yuborilganda, memberController.verifyAuth middleware orqali userning authenticated ekanligi tekshiriladi. Agar user authenticated bo'lsa, orderController.getMyOrders methodi chaqiriladi va userning orderlari qaytariladi. Bu route da query parametrlari orqali orderlarni filtrlash, sort qilish va pagination qilish mumkin.
 router.get(
   "/order/all",
   memberController.verifyAuth,
   orderController.getMyOrders,
+);
+
+router.post(
+  "/order/update",
+  memberController.verifyAuth,
+  orderController.updateOrder,
 );
 
 export default router;

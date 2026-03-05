@@ -29,7 +29,7 @@ class ProductService {
 
   // getproducts asinxron objectini, typei product bo'gan array qaytaradi
   public async getProducts(inquiry: ProductInquiry): Promise<Product[]> {
-    const match: T = { ProductStatus: ProductStatus.PROCESS };
+    const match: T = { productStatus: ProductStatus.PROCESS };
 
     // productCollection va search query parametrlari mavjud bo'lsa, match objectiga ularni qo'shish. Bu match objecti MongoDB aggregate pipeline da $match stage uchun ishlatiladi.
     if (inquiry.productCollection)
@@ -66,7 +66,7 @@ class ProductService {
   ): Promise<Product> {
     const productId = shapeIntoMongooseObjectId(id);
     let result = await this.productModel
-      .findOne({ _id: productId, ProductStatus: ProductStatus.PROCESS })
+      .findOne({ _id: productId, productStatus: ProductStatus.PROCESS })
       .exec();
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 

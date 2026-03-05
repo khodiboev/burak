@@ -3,8 +3,8 @@ import {
   ProductCollection,
   ProductSize,
   ProductVolume,
+  ProductStatus,
 } from "../libs/enums/product.enum";
-import { ProductStatus } from "../libs/enums/product.enum";
 
 const productSchema = new Schema(
   {
@@ -17,7 +17,7 @@ const productSchema = new Schema(
     productCollection: {
       type: String,
       enum: ProductCollection,
-      // required: true,
+      required: true,
     },
 
     productName: {
@@ -54,6 +54,7 @@ const productSchema = new Schema(
     productImages: {
       type: [String],
       default: [],
+      required: true,
     },
 
     productViews: {
@@ -64,5 +65,8 @@ const productSchema = new Schema(
   { timestamps: true },
 ); //updatedAt, createdAt
 
-productSchema.index({ productName: 1, productVolume: 1 }, { unique: true });
+productSchema.index(
+  { productName: 1, productSize: 1, productVolume: 1 },
+  { unique: true },
+);
 export default mongoose.model("Product", productSchema);
