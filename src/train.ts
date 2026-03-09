@@ -32,6 +32,17 @@
 */
 
 //MIT Tasks <--Y--W--V--U--T--R--P--O--N--M--L--K--J--I--H2--H--G--F--E--D--C--B--A--
+
+// TASK-ZB:
+// Shunday function yozing, uni 2 ta number parametri bolsin va berilgan sonlar orasidan random raqam return qilsin
+// MASALAN: randomBetween(30, 50) return 45
+
+function randomBetween(a: number, b: number): number {
+  return Math.floor(Math.random() * (b - a)) + a;
+}
+console.log(randomBetween(30, 50));
+
+
 // TASK Z
 // Shunday function yozing. Bu function sonlardan iborat array
 // qabul qilsin. Function'ning vazifasi array tarkibidagi juft
@@ -44,17 +55,17 @@
 // sonlarni topib, ularni hisoblab yig'indisini qaytarmoqda.
 
 
-function sumEvens(arr: number[]): number {
-  let sum = 0;
-  for (let num of arr) {
-    if (num % 2 === 0) {
-      sum += num;
-    }
-  }
-  return sum;
-}
-console.log(sumEvens([1,2,3])); 
-console.log(sumEvens([1,2,3,2]));
+// function sumEvens(arr: number[]): number {
+//   let sum = 0;
+//   for (let num of arr) {
+//     if (num % 2 === 0) {
+//       sum += num;
+//     }
+//   }
+//   return sum;
+// }
+// console.log(sumEvens([1,2,3])); 
+// console.log(sumEvens([1,2,3,2]));
 
 
 // TASK Y
