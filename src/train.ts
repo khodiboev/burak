@@ -31,16 +31,34 @@
   Database validation
 */
 
-//MIT Tasks <--Y--W--V--U--T--R--P--O--N--M--L--K--J--I--H2--H--G--F--E--D--C--B--A--
+
+
+// -----------> MIT TASKS:
+
+// TASK ZC
+// Selisy (°C) shkalasi bo'yicha raqam qabul qilib, uni
+// Ferenhayt (°F) shkalisaga o'zgaritib beradigan function yozing.
+// MASALAN: celsiusToFahrenheit(0) return 32;
+// MASALAN: celsiusToFahrenheit(10) return 50;
+// Yuqoridagi misolda, 0°C, 32°F'ga teng.
+// Yoki 10 gradus Selsiy, 50 Farenhaytga teng.
+// °C va °F => Tempraturani o'lchashda ishlatiladigan o'lchov birligi.
+
+function celsiusToFahrenheit(celsius: number): number {
+  return (celsius * 9) / 5 + 32;
+}
+console.log(celsiusToFahrenheit(0));
+console.log(celsiusToFahrenheit(10));
+
 
 // TASK-ZB:
 // Shunday function yozing, uni 2 ta number parametri bolsin va berilgan sonlar orasidan random raqam return qilsin
 // MASALAN: randomBetween(30, 50) return 45
 
-function randomBetween(a: number, b: number): number {
-  return Math.floor(Math.random() * (b - a)) + a;
-}
-console.log(randomBetween(30, 50));
+// function randomBetween(a: number, b: number): number {
+//   return Math.floor(Math.random() * (b - a)) + a;
+// }
+// console.log(randomBetween(30, 50));
 
 
 // TASK Z
