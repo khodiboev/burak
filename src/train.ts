@@ -35,6 +35,24 @@
 
 // -----------> MIT TASKS:
 
+// TASK ZE:
+// Shunday function yozing, uni  string parametri bolsin. String ichida takrorlangan harflarni olib tashlab qolganini qaytarsin
+// MASALAN: removeDuplicate('stringg') return 'string'
+
+function removeDuplicate(str: string): string {
+  let result: string = "";
+  for (let i = 0; i < str.length; i++) {
+    if (!result.includes(str[i])) {
+      result += str[i];
+    }
+  }
+  return result;
+}
+console.log(removeDuplicate('stringg'));
+console.log(removeDuplicate('mississippi')); 
+
+
+
 // TASK ZD
 // Shunday function yozing. Bu function o'ziga, parametr sifatida
 // birinchi oddiy number, keyin yagona array va uchinchi bo'lib oddiy number
@@ -46,12 +64,12 @@
 // Bizning function uchinchi berilgan '2' raqamini shu '3' bilan almashtirib,
 // yangilangan arrayni qaytarmoqda.
 
-function changeNumberInArray(index: number, arr: number[], newValue: number): number[] {
-  if (index >= 0 && index < arr.length) {
-    arr[index] = newValue;}
-  return arr;
-}
-console.log(changeNumberInArray(1, [1, 3, 7, 2], 2));
+// function changeNumberInArray(index: number, arr: number[], newValue: number): number[] {
+//   if (index >= 0 && index < arr.length) {
+//     arr[index] = newValue;}
+//   return arr;
+// }
+// console.log(changeNumberInArray(1, [1, 3, 7, 2], 2));
 
 
 // TASK ZC
