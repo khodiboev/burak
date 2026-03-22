@@ -35,21 +35,39 @@
 
 // -----------> MIT TASKS:
 
+// TASK-ZF:
+// Shunday function yozing, uni string parametri bolsin. String ichidagi har bir sozni bosh harflarini katta harf qilib qaytarsin lekin 1 yoki 2 harfdan iborat sozlarni esa oz holicha qoldirsin.
+// MASALAN: capitalizeWords('name should be a string') return 'Name Should be a String'
+
+function capitalizeWords(str: string): string {
+  let words = str.split(" ");
+  let result = [];
+  for (let word of words) {
+    if (word.length > 2) {
+      result.push(word[0].toUpperCase() + word.slice(1));
+    } else {
+      result.push(word);
+    }
+  }
+  return result.join(" ");
+}
+console.log(capitalizeWords("name should be a string"));
+
 // TASK ZE:
 // Shunday function yozing, uni  string parametri bolsin. String ichida takrorlangan harflarni olib tashlab qolganini qaytarsin
 // MASALAN: removeDuplicate('stringg') return 'string'
 
-function removeDuplicate(str: string): string {
-  let result: string = "";
-  for (let i = 0; i < str.length; i++) {
-    if (!result.includes(str[i])) {
-      result += str[i];
-    }
-  }
-  return result;
-}
-console.log(removeDuplicate('stringg'));
-console.log(removeDuplicate('mississippi')); 
+// function removeDuplicate(str: string): string {
+//   let result: string = "";
+//   for (let i = 0; i < str.length; i++) {
+//     if (!result.includes(str[i])) {
+//       result += str[i];
+//     }
+//   }
+//   return result;
+// }
+// console.log(removeDuplicate('stringg'));
+// console.log(removeDuplicate('mississippi')); 
 
 
 
