@@ -34,24 +34,32 @@
 
 
 // -----------> MIT TASKS:
+// TASK-ZG:
+// Shunday function yozing, u berilgan string parametrni snake casega otkazib qaytarsin. 
+// MASALAN: capitalizeWords('name should be a string') return 'name_should_be_a_string'
+
+function toSnakeCase(str: string): string {
+  return str.split(" ").join("_");
+}
+console.log(toSnakeCase("name should be a string"));
 
 // TASK-ZF:
 // Shunday function yozing, uni string parametri bolsin. String ichidagi har bir sozni bosh harflarini katta harf qilib qaytarsin lekin 1 yoki 2 harfdan iborat sozlarni esa oz holicha qoldirsin.
 // MASALAN: capitalizeWords('name should be a string') return 'Name Should be a String'
 
-function capitalizeWords(str: string): string {
-  let words = str.split(" ");
-  let result = [];
-  for (let word of words) {
-    if (word.length > 2) {
-      result.push(word[0].toUpperCase() + word.slice(1));
-    } else {
-      result.push(word);
-    }
-  }
-  return result.join(" ");
-}
-console.log(capitalizeWords("name should be a string"));
+// function capitalizeWords(str: string): string {
+//   let words = str.split(" ");
+//   let result = [];
+//   for (let word of words) {
+//     if (word.length > 2) {
+//       result.push(word[0].toUpperCase() + word.slice(1));
+//     } else {
+//       result.push(word);
+//     }
+//   }
+//   return result.join(" ");
+// }
+// console.log(capitalizeWords("name should be a string"));
 
 // TASK ZE:
 // Shunday function yozing, uni  string parametri bolsin. String ichida takrorlangan harflarni olib tashlab qolganini qaytarsin
