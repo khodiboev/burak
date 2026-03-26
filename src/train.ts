@@ -34,14 +34,31 @@
 
 
 // -----------> MIT TASKS:
+// TASK-ZH:
+// Shunday function yozing, u berilgan array parametrni ichidagi eng katta raqamgacha tushib qolgan raqamlarni bir arrayda qaytarsin. 
+// MASALAN: findDisappearedNumbers([1, 3, 4, 7]) return [2, 5, 6]
+
+function findDisappearedNumbers(arr: number[]): number[] {
+  let max = Math.max(...arr);
+  let result: number[] = [];
+  for (let i = 1; i <= max; i++) {
+    if (!arr.includes(i)) {
+      result.push(i);
+    }
+  }
+  return result;
+}
+console.log(findDisappearedNumbers([1, 3, 4, 7]));
+
+
 // TASK-ZG:
 // Shunday function yozing, u berilgan string parametrni snake casega otkazib qaytarsin. 
 // MASALAN: capitalizeWords('name should be a string') return 'name_should_be_a_string'
 
-function toSnakeCase(str: string): string {
-  return str.split(" ").join("_");
-}
-console.log(toSnakeCase("name should be a string"));
+// function toSnakeCase(str: string): string {
+//   return str.split(" ").join("_");
+// }
+// console.log(toSnakeCase("name should be a string"));
 
 // TASK-ZF:
 // Shunday function yozing, uni string parametri bolsin. String ichidagi har bir sozni bosh harflarini katta harf qilib qaytarsin lekin 1 yoki 2 harfdan iborat sozlarni esa oz holicha qoldirsin.
