@@ -31,28 +31,42 @@
   Database validation
 */
 
-
-
 // -----------> MIT TASKS:
+
+// TASK ZI
+// Shundan function yozing, bu function 3 soniydan so'ng
+// "Hello World!" so'zini qaytarsin.
+// MASALAN: delayHelloWorld("Hello World"); return "Hello World";
+
+function delayHelloWorld(message: string): Promise<string> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(message);
+    }, 3000);
+  });
+}
+delayHelloWorld("Hello World").then((result) => {
+  console.log(result);
+});
+
 // TASK-ZH:
-// Shunday function yozing, u berilgan array parametrni ichidagi eng katta raqamgacha tushib qolgan raqamlarni bir arrayda qaytarsin. 
+// Shunday function yozing, u berilgan array parametrni ichidagi eng katta raqamgacha tushib qolgan raqamlarni bir arrayda qaytarsin.
 // MASALAN: findDisappearedNumbers([1, 3, 4, 7]) return [2, 5, 6]
 
-function findDisappearedNumbers(arr: number[]): number[] {
-  let max = Math.max(...arr);
-  let result: number[] = [];
-  for (let i = 1; i <= max; i++) {
-    if (!arr.includes(i)) {
-      result.push(i);
-    }
-  }
-  return result;
-}
-console.log(findDisappearedNumbers([1, 3, 4, 7]));
-
+// function findDisappearedNumbers(arr: number[]): number[] {
+//   let max = Math.max(...arr);
+//   let result: number[] = [];
+//   for (let i = 1; i <= max; i++) {
+//     if (!arr.includes(i)) {
+//       result.push(i);
+//     }
+//   }
+//   return result;
+// }
+// console.log(findDisappearedNumbers([1, 3, 4, 7]));
 
 // TASK-ZG:
-// Shunday function yozing, u berilgan string parametrni snake casega otkazib qaytarsin. 
+// Shunday function yozing, u berilgan string parametrni snake casega otkazib qaytarsin.
 // MASALAN: capitalizeWords('name should be a string') return 'name_should_be_a_string'
 
 // function toSnakeCase(str: string): string {
@@ -92,9 +106,7 @@ console.log(findDisappearedNumbers([1, 3, 4, 7]));
 //   return result;
 // }
 // console.log(removeDuplicate('stringg'));
-// console.log(removeDuplicate('mississippi')); 
-
-
+// console.log(removeDuplicate('mississippi'));
 
 // TASK ZD
 // Shunday function yozing. Bu function o'ziga, parametr sifatida
@@ -114,7 +126,6 @@ console.log(findDisappearedNumbers([1, 3, 4, 7]));
 // }
 // console.log(changeNumberInArray(1, [1, 3, 7, 2], 2));
 
-
 // TASK ZC
 // Selisy (°C) shkalasi bo'yicha raqam qabul qilib, uni
 // Ferenhayt (°F) shkalisaga o'zgaritib beradigan function yozing.
@@ -130,7 +141,6 @@ console.log(findDisappearedNumbers([1, 3, 4, 7]));
 // console.log(celsiusToFahrenheit(0));
 // console.log(celsiusToFahrenheit(10));
 
-
 // TASK-ZB:
 // Shunday function yozing, uni 2 ta number parametri bolsin va berilgan sonlar orasidan random raqam return qilsin
 // MASALAN: randomBetween(30, 50) return 45
@@ -139,7 +149,6 @@ console.log(findDisappearedNumbers([1, 3, 4, 7]));
 //   return Math.floor(Math.random() * (b - a)) + a;
 // }
 // console.log(randomBetween(30, 50));
-
 
 // TASK Z
 // Shunday function yozing. Bu function sonlardan iborat array
@@ -152,7 +161,6 @@ console.log(findDisappearedNumbers([1, 3, 4, 7]));
 // berilayotgan array tarkibidagi sonlar ichidan faqatgina juft bo'lgan
 // sonlarni topib, ularni hisoblab yig'indisini qaytarmoqda.
 
-
 // function sumEvens(arr: number[]): number {
 //   let sum = 0;
 //   for (let num of arr) {
@@ -162,9 +170,8 @@ console.log(findDisappearedNumbers([1, 3, 4, 7]));
 //   }
 //   return sum;
 // }
-// console.log(sumEvens([1,2,3])); 
+// console.log(sumEvens([1,2,3]));
 // console.log(sumEvens([1,2,3,2]));
-
 
 // TASK Y
 // Shunday function yozing, uni 2'ta array parametri bo'lsin.
